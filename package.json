@@ -1,0 +1,47 @@
+{
+  "name": "vite-plugin-zod-validate-envs",
+  "version": "0.0.1",
+  "description": "Vite plugin to parse, validate and transform environment variables using Zod",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "env-var",
+    "validation",
+    "zod",
+    "env"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "format": "prettier --single-quote --write ."
+  },
+  "dependencies": {
+    "unconfig": "^0.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6",
+    "unbuild": "^1.2.1",
+    "zod": "^3.21.4"
+  },
+  "peerDependencies": {
+    "vite": "^4"
+  },
+  "engines": {
+    "node": "^18.15"
+  }
+}

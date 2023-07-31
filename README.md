@@ -15,9 +15,7 @@ import { defineConfig } from 'vite';
 import { validateEnvs } from '@kevbook/vite-plugin-zod-validate-envs';
 
 export default defineConfig({
-  plugins: [
-    validateEnvs({ validatorDir: resolve('src/config') })
-  ],
+  plugins: [validateEnvs({ validatorDir: resolve('src/config') })],
 });
 ```
 
