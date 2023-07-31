@@ -1,0 +1,39 @@
+# Keys
+*.pem
+*.env
+*.env.*
+!*.env.sample
+*.aws
+*.crt
+*.key
+
+# Build
+.npmrc
+tmp/
+**/tmp
+dist/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+node_modules/
+.pnpm-store/
+package-lock.json
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDEs
+.idea/
+.vscode/
+*.iml
