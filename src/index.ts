@@ -11,7 +11,7 @@ type PluginOptions = {
 };
 
 // Save the process envs state
-const PROCESS_ENVS = process.env;
+const PROCESS_ENVS = Object.assign({}, process.env);
 
 /**
  * Load the zod schema defined in "validate-envs" file using unconfig

@@ -1,6 +1,6 @@
 # vite-plugin-zod-validate-envs
 
-Vite plugin to parse, validate and transform environment variables using [Zod](https://zod.dev/) at build or dev time.
+Vite plugin to validate and transform environment variables using [Zod](https://zod.dev/) at build or dev time.
 
 ## Usage
 
@@ -26,5 +26,6 @@ import { z } from 'zod';
 export default z.object({
   OTEL_SERVICE_NAME: z.string().toLowerCase(),
   VERCEL_GIT_COMMIT_SHA: z.string().transform((val) => val.substring(0, 8)),
+  ENABLED_FLAG: z.enum(['true', 'false']),
 });
 ```
