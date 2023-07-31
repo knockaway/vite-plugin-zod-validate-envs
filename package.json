@@ -1,7 +1,7 @@
 {
-  "name": "vite-plugin-zod-validate-envs",
-  "version": "0.0.1",
-  "description": "Vite plugin to parse, validate and transform environment variables using Zod",
+  "name": "@kevbook/vite-plugin-zod-validate-envs",
+  "version": "0.0.3",
+  "description": "Vite plugin to validate and transform environment variables using Zod",
   "keywords": [
     "vite",
     "vite-plugin",
@@ -10,6 +10,9 @@
     "zod",
     "env"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "exports": {
     ".": {
