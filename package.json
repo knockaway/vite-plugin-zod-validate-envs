@@ -1,6 +1,6 @@
 {
   "name": "@kevbook/vite-plugin-zod-validate-envs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vite plugin to validate and transform environment variables using Zod",
   "keywords": [
     "vite",

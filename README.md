@@ -15,12 +15,12 @@ import { defineConfig } from 'vite';
 import { validateEnvs } from '@kevbook/vite-plugin-zod-validate-envs';
 
 export default defineConfig({
-  plugins: [validateEnvs({ validatorDir: resolve('src/config') })],
+  plugins: [validateEnvs({ schemaFile: resolve('config/validate-envs') })],
 });
 ```
 
 ```ts
-// validate-envs.ts (file name must be this)
+// validate-envs.ts
 import { z } from 'zod';
 
 export default z.object({

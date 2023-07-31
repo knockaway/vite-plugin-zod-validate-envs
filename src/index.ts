@@ -7,24 +7,23 @@ import type { AnyZodObject } from 'zod';
 import { type ConfigEnv, type Plugin, type UserConfig } from 'vite';
 
 type PluginOptions = {
-  validatorDir: string;
+  schemaFile: string;
 };
 
 // Save the process envs state
 const PROCESS_ENVS = Object.assign({}, process.env);
 
 /**
- * Load the zod schema defined in "validate-envs" file using unconfig
+ * Load the zod schema defined in the "schemaFile" using unconfig
  */
-const loadConfig = async function (rootDir: string) {
+const loadConfig = async function (schemaFile: string) {
   const loader = createConfigLoader({
     sources: [
       {
-        files: 'validate-envs',
+        files: schemaFile,
         extensions: ['ts', 'cts', 'mts', 'js', 'cjs', 'mjs'],
       },
     ],
-    cwd: rootDir,
   });
   const result = await loader.load();
   return result.config;
@@ -42,8 +41,10 @@ async function validateEnvs(
   for (const key in process.env) delete process.env[key];
   Object.assign(process.env, PROCESS_ENVS);
 
-  if (!options?.validatorDir) {
-    throw new Error('Missing validatorDir for vite-plugin-zod-validate-envs');
+  if (!options?.schemaFile) {
+    throw new Error(
+      'Missing schemaFile option for vite-plugin-zod-validate-envs',
+    );
   }
 
   // Resolve the root and envDir
@@ -55,7 +56,7 @@ async function validateEnvs(
     : resolvedRoot;
 
   const envs = loadEnv(envConfig.mode, envDir, userConfig.envPrefix || '');
-  const schema = (await loadConfig(options.validatorDir)) as AnyZodObject;
+  const schema = (await loadConfig(options.schemaFile)) as AnyZodObject;
 
   // We do not want non schema values to be removed
   const validated = schema.nonstrict().safeParse(envs);
