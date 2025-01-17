@@ -7,6 +7,7 @@ import type { AnyZodObject } from 'zod';
 import { type ConfigEnv, type Plugin, type UserConfig } from 'vite';
 
 type PluginOptions = {
+  // A file that exports a default Zod schema
   schemaFile: string;
 };
 
@@ -26,7 +27,11 @@ const loadConfig = async function (schemaFile: string) {
     ],
   });
   const result = await loader.load();
-  return result.config;
+  // For some reason with the way importx loads the ts files, the default export comes through as a function
+  if (typeof result.config !== 'function') {
+    throw new Error('Schema file must export Zod schema as default');
+  }
+  return result.config();
 };
 
 /**
@@ -59,7 +64,7 @@ async function validateEnvs(
   const schema = (await loadConfig(options.schemaFile)) as AnyZodObject;
 
   // We do not want non schema values to be removed
-  const validated = schema.nonstrict().safeParse(envs);
+  const validated = schema.safeParse(envs);
   if (validated.success) {
     for (const key in validated.data) {
       process.env[key] = validated.data[key];
