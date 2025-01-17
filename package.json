@@ -11,7 +11,7 @@
     "env"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "type": "module",
   "exports": {
@@ -32,19 +32,19 @@
     "format": "prettier --single-quote --write ."
   },
   "dependencies": {
-    "unconfig": "^0.3.10"
+    "unconfig": "^0.6.0"
   },
   "devDependencies": {
-    "@types/node": "^20.4.5",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6",
-    "unbuild": "^1.2.1",
-    "zod": "^3.21.4"
+    "@types/node": "^22.10.7",
+    "prettier": "^3.4.2",
+    "typescript": "^5.5.4",
+    "unbuild": "^3.3.1",
+    "zod": "^3.24.1"
   },
   "peerDependencies": {
     "vite": "^4"
   },
   "engines": {
-    "node": "^18.15"
+    "node": ">=18.15"
   }
 }
