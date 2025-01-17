@@ -1,0 +1,22 @@
+# Keys
+*.pem
+*.env
+*.env.*
+!*.env.sample
+*.aws
+*.crt
+*.key
+
+# Husky
+.husky/
+!.husky/pre-commit
+!.husky/_/husky.sh
+
+# Build files
+.npmrc
+*.tsbuildinfo
+dist/
+
+# Lock files
+package-lock.json
+pnpm-lock.*
