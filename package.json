@@ -1,6 +1,6 @@
 {
   "name": "@knockaway/vite-plugin-zod-validate-envs",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Vite plugin to validate and transform environment variables using Zod",
   "keywords": [
     "vite",
