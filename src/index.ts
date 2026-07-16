@@ -80,5 +80,17 @@ async function validateEnvs(
 
 export const ValidateEnvs = (options: PluginOptions): Plugin => ({
   name: 'vite-plugin-zod-validate-envs',
-  config: (config, env) => validateEnvs(config, env, options),
+  // Vite sorts `config` hooks by their `order` before falling back to plugin
+  // array position, so a plugin declaring `order: 'pre'` runs ahead of any
+  // plain `config` hook no matter where it sits in `plugins`. Consumers that
+  // read process.env from such a hook (e.g. SvelteKit's
+  // vite-plugin-sveltekit-setup, which snapshots env for $env/static/* and has
+  // used `order: 'pre'` since 2.56.0) would otherwise observe the raw,
+  // untransformed values. Declaring `order: 'pre'` here puts us in the same
+  // bucket, where array position applies again and this plugin can be ordered
+  // first. Note `enforce: 'pre'` would not help: hook order outranks enforce.
+  config: {
+    order: 'pre',
+    handler: (config, env) => validateEnvs(config, env, options),
+  },
 });
