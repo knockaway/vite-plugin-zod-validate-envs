@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { createConfigLoader } from 'unconfig';
 import { loadEnv, normalizePath } from 'vite';
 
-import type { AnyZodObject } from 'zod';
+import type { ZodType } from 'zod';
 import { type ConfigEnv, type Plugin, type UserConfig } from 'vite';
 
 type PluginOptions = {
@@ -27,11 +27,14 @@ const loadConfig = async function (schemaFile: string) {
     ],
   });
   const result = await loader.load();
-  // For some reason with the way importx loads the ts files, the default export comes through as a function
-  if (typeof result.config !== 'function') {
+  // unconfig hands the default export back wrapped in a function, so unwrap it
+  // when it is one, but still accept a bare schema.
+  const schema =
+    typeof result.config === 'function' ? result.config() : result.config;
+  if (typeof schema?.safeParse !== 'function') {
     throw new Error('Schema file must export Zod schema as default');
   }
-  return result.config();
+  return schema as ZodType<Record<string, string>>;
 };
 
 /**
@@ -61,7 +64,7 @@ async function validateEnvs(
     : resolvedRoot;
 
   const envs = loadEnv(envConfig.mode, envDir, userConfig.envPrefix || '');
-  const schema = (await loadConfig(options.schemaFile)) as AnyZodObject;
+  const schema = await loadConfig(options.schemaFile);
 
   // We do not want non schema values to be removed
   const validated = schema.safeParse(envs);
@@ -72,7 +75,7 @@ async function validateEnvs(
   } else {
     const errors: string[] = [];
     for (const err of validated.error.issues) {
-      errors.push(`Invalid value for: ${err.path[0]}`);
+      errors.push(`Invalid value for: ${String(err.path[0])}`);
     }
     throw new Error(errors.join(EOL));
   }

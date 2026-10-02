@@ -2,6 +2,12 @@
 
 Vite plugin to validate and transform environment variables using [Zod](https://zod.dev/) at build or dev time.
 
+## Requirements
+
+- Vite 7 or 8
+- Zod 4 (use `0.2.x` for Zod 3)
+- Node `^20.19.0 || >=22.12.0`
+
 ## Usage
 
 ```shell

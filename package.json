@@ -33,19 +33,21 @@
     "format": "prettier --single-quote --write ."
   },
   "dependencies": {
-    "unconfig": "^0.6.0"
+    "unconfig": "^7.5.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7",
-    "prettier": "^3.4.2",
-    "typescript": "^5.5.4",
-    "unbuild": "^3.3.1"
+    "@types/node": "^24.10.3",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "unbuild": "^3.6.1",
+    "vite": "^8.3.2",
+    "zod": "^4.6.5"
   },
   "peerDependencies": {
-    "vite": "^4 || ^5 || ^6 || ^7",
-    "zod": "^3"
+    "vite": "^7 || ^8",
+    "zod": "^4"
   },
   "engines": {
-    "node": ">=18.15"
+    "node": "^20.19.0 || >=22.12.0"
   }
 }
