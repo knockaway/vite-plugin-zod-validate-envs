@@ -1,0 +1,19 @@
+# Dependency install scripts pnpm may run (true) or skip (false). pnpm 12 fails the install on any
+# script not listed here.
+allowBuilds:
+  # Checks or fetches esbuild's platform binary; vite and unbuild bundle with it.
+  esbuild: true
+
+# Do not resolve package versions until they are at least 48 hours old.
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+  - '@knockaway/*'
+
+trustPolicy: no-downgrade
+
+# pnpm 11 defaults this to `install`, so `pnpm run` can install when node_modules looks stale. Warn instead.
+verifyDepsBeforeRun: warn
+
+# Corepack enforces the packageManager pin in CI and Docker. pmOnFail: ignore stops pnpm 12 writing a
+# second lockfile document, which GitHub's dependency graph cannot read, so Dependabot alerts keep working.
+pmOnFail: ignore
